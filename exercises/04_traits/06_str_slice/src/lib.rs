@@ -31,15 +31,15 @@ impl Ticket {
         }
     }
 
-    pub fn title(&self) -> &String {
+    pub fn title(&self) -> &str {
         &self.title
     }
 
-    pub fn description(&self) -> &String {
+    pub fn description(&self) -> &str {
         &self.description
     }
 
-    pub fn status(&self) -> &String {
+    pub fn status(&self) -> &str {
         &self.status
     }
 }
@@ -57,5 +57,7 @@ mod tests {
         assert_eq!(TypeId::of::<str>(), ticket.title().type_id());
         assert_eq!(TypeId::of::<str>(), ticket.description().type_id());
         assert_eq!(TypeId::of::<str>(), ticket.status().type_id());
+
+        println!("{:?}", ticket.title().type_id());
     }
 }
