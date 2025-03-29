@@ -60,11 +60,15 @@ impl TicketStore {
 }
 
 impl Index<TicketId> for TicketStore {
+    // 定义输出类型为 Ticket
     type Output = Ticket;
 
     fn index(&self, index: TicketId) -> &Self::Output {
-        self.get(index).unwrap()
+        // self.get(index).unwrap()
         // &self[index]
+        self.tickets.iter()
+            .find(|&t| t.id == index)
+            .expect("Ticket not found")
     }
 }
 
@@ -72,7 +76,12 @@ impl Index<&TicketId> for TicketStore {
     type Output = Ticket;
 
     fn index(&self, index: &TicketId) -> &Self::Output {
-        &self[*index]
+        // &self[*index]
+        // self.tickets.index(*index)
+        self.tickets
+            .iter()
+            .find(|&t| t.id == *index)// 通过解引用 &TicketId 来比较
+        .expect("Ticket not found")
     }
 }
 
